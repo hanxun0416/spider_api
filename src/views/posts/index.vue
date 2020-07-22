@@ -1,5 +1,38 @@
 <template>
   <div class="app-container">
+
+<el-form  class="demo-form-inline" :label-position="left" label-width="80px" >
+  <el-row :gutter="20">
+
+  <el-col :span="6" :xs="24" :sm="12" :md="6" :lg="6" :xl="6">
+     <el-form-item label="审批人">
+    <el-input  placeholder="审批人"></el-input>
+  </el-form-item>
+  </el-col>
+  <el-col :span="6"  :xs="24"  :sm="12" :md="6" :lg="6" :xl="6">
+     <el-form-item label="审批人">
+    <el-input  placeholder="审批人"></el-input>
+  </el-form-item>
+  </el-col>
+  <el-col :span="6"  :xs="24"  :sm="12" :md="6" :lg="6" :xl="6">
+     <el-form-item label="审批人">
+    <el-input  placeholder="审批人"></el-input>
+  </el-form-item>
+  </el-col>
+  <el-col :span="6" :xs="24"  :sm="12" :md="6" :lg="6" :xl="6">
+     <el-form-item label="审批人">
+    <el-input  placeholder="审批人"></el-input>
+  </el-form-item>
+  </el-col>
+</el-row>
+
+
+  <el-form-item>
+    <el-button type="primary" @click="onSubmit">查询</el-button>
+  </el-form-item>
+</el-form>
+
+
     <el-table
       v-loading="listLoading"
       :data="list"

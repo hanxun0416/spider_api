@@ -56,23 +56,23 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/posts',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: '文章', icon: 'el-icon-s-help' },
+    redirect: '/posts/list',
+    name: 'Posts',
+    meta: { title: '文章', icon: 'form' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '所有文章', icon: 'table' }
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/posts/index'),
+        meta: { title: '所有文章'}
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '写文章', icon: 'tree' }
+        path: 'write',
+        name: 'Write',
+        component: () => import('@/views/write/index'),
+        meta: { title: '写文章'}
       }
       // ,
       // {
