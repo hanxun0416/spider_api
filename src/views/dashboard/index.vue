@@ -1,25 +1,25 @@
 <template>
   <div class="dashboard-container">
-    123
-   <component :is="currentRole" />
+    <component :is="currentRole" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import adminDashboard from "./admin";
+import { mapGetters } from 'vuex';
+import adminDashboard from './admin';
 
 export default {
-  name: "Dashboard",
-    components: { adminDashboard },
-  computed: {
-    ...mapGetters(["name"])
-  },
+  name: 'Dashboard',
+  components: { adminDashboard },
     data() {
     return {
       currentRole: 'adminDashboard'
-    }
+    };
   },
+  computed: {
+    ...mapGetters(['name'])
+  }
+
 };
 </script>
 
