@@ -115,6 +115,9 @@ export default {
           }).catch(() => {
             this.loading = false
           })
+            // this.loading = true
+            // this.$router.push({ path: this.redirect || '/' })
+            // this.loading = false
         } else {
           console.log('error submit!!')
           return false

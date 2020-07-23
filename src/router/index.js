@@ -65,13 +65,13 @@ export const constantRoutes = [
       {
         path: 'list',
         name: 'List',
-        component: () => import('@/views/posts/index'),
+        component: () => import('@/views/article/posts/index'),
         meta: { title: '所有文章'}
       },
       {
         path: 'write',
         name: 'Write',
-        component: () => import('@/views/write/index'),
+        component: () => import('@/views/article/write/index'),
         meta: { title: '写文章'}
       }
       // ,
