@@ -11,6 +11,7 @@ import adminDashboard from "./admin";
 
 export default {
   name: "Dashboard",
+    components: { adminDashboard },
   computed: {
     ...mapGetters(["name"])
   },

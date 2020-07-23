@@ -77,7 +77,7 @@
 // }
 
 export default {
-  name: 'DashboardAdmin',
+  name: 'adminDashboard',
   // components: {
   //   GithubCorner,
   //   PanelGroup,
