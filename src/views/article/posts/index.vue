@@ -50,10 +50,6 @@
   </el-form-item>
 </el-form>
  <el-button type="primary" icon="el-icon-plus" size="mini">写文章</el-button>
-
-
-
-
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -63,37 +59,72 @@
     >
     <el-table-column
       type="selection"
-      width="55">
+      width="60"
+      align="center">
     </el-table-column>
-      <el-table-column align="center" label="ID" width="95">
+      <el-table-column align="left" label="标题" width="200" :show-overflow-tooltip="true">
         <template slot-scope="scope">
-          {{ scope.$index }}
+         <!-- <el-link type="primary" :href="scope.row.url">{{ scope.row.title }}</el-link> -->
+         <a :href="scope.row.url" style="color:#1890ff">{{ scope.row.title }}</a>
         </template>
       </el-table-column>
-      <el-table-column label="Title">
+      <el-table-column label="状态" >
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          <!-- <el-badge is-dot class="item">数据查询</el-badge> -->
+
+
+
+          <i  v-if="scope.row.status=='0'" class="badge">正常</i>
+          <!-- <el-badge is-dot v-else-if="scope.row.status=='1'">编辑完毕</el-badge>
+          <el-badge is-dot v-else-if="scope.row.status=='2'">发送完毕</el-badge>
+          <el-badge is-dot v-else-if="scope.row.status=='-1'">作废</el-badge> -->
+
         </template>
       </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
+      <el-table-column label="分类"  align="left">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <el-tag v-for="(item,index) in JSON.parse(scope.row.category)" :key="index">{{item}}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="Pageviews" width="110" align="center">
+      <el-table-column label="专题" align="left">
         <template slot-scope="scope">
           {{ scope.row.pageviews }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
+      <el-table-column class-name="status-col" label="标签" align="left" width="80">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          <el-tag v-for="(item,index) in JSON.parse(scope.row.tag)" :key="index">{{item}}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
+         <el-table-column label="评论"  align="left" width="80">
+        <template slot-scope="scope">
+          {{ scope.row.pageviews }}
+        </template>
+      </el-table-column>
+         <el-table-column label="访问"  align="left" width="80">
+        <template slot-scope="scope">
+          {{ scope.row.pageviews }}
+        </template>
+      </el-table-column>
+
+
+      <el-table-column align="left" prop="created_at" label="发布时间">
         <template slot-scope="scope">
           <i class="el-icon-time" />
           <span>{{ scope.row.display_time }}</span>
+        </template>
+      </el-table-column>
+           <el-table-column label="操作" align="left">
+        <template >
+            <el-tooltip class="item" effect="dark" content="编辑" placement="top">
+                <el-button type="primary" size="small" icon="el-icon-edit" circle  @click="getArticle('1767852b5e599572330c648165456f2e')"></el-button>
+            </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="回收站" placement="top">
+                <el-button type="danger" size="small" icon="el-icon-delete" circle></el-button>
+            </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="设置" placement="top">
+                <el-button type="info" size="small" icon="el-icon-setting" circle></el-button>
+            </el-tooltip>
         </template>
       </el-table-column>
     </el-table>
@@ -101,7 +132,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getList,getApp } from '@/api/table'
 
 export default {
   filters: {
@@ -139,7 +170,8 @@ export default {
       let obj = {status:0}
       getList(obj,this.listPage).then(response => {
         console.log(response)
-        this.list = response.data.items
+
+        this.list = response.data.content
         this.listLoading = false
       })
     },
@@ -160,6 +192,16 @@ export default {
 
         console.log(this.form)
       },
+      // 获取文章详情
+      getArticle(id){
+        console.log(id)
+          getApp(id).then(res=>{
+            console.log(res)
+          })
+      }
   }
 }
 </script>
+<style scoped>
+  .item{margin-top: 5px}
+</style>

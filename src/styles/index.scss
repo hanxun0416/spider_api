@@ -63,3 +63,20 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+.badge{
+  font-style: normal;
+  position: relative;
+}
+.badge::before{
+  content: "";
+  background-color: #52c41a;
+  border-radius: 50%;
+  color: #FFF;
+  display: inline-block;
+  font-size: 12px;
+  height: 8px;
+  width: 8px;
+  text-align: center;
+  white-space: nowrap;
+  margin-right: 5px;
+}
