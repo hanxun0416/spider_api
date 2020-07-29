@@ -72,8 +72,6 @@
         <template slot-scope="scope">
           <!-- <el-badge is-dot class="item">数据查询</el-badge> -->
 
-
-
           <i  v-if="scope.row.status=='0'" class="badge">正常</i>
           <!-- <el-badge is-dot v-else-if="scope.row.status=='1'">编辑完毕</el-badge>
           <el-badge is-dot v-else-if="scope.row.status=='2'">发送完毕</el-badge>
@@ -83,7 +81,7 @@
       </el-table-column>
       <el-table-column label="分类"  align="left">
         <template slot-scope="scope">
-          <el-tag v-for="(item,index) in JSON.parse(scope.row.category)" :key="index">{{item}}</el-tag>
+          <el-tag v-for="(item,index) in scope.row.category" :key="index">{{item}}</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="专题" align="left">
@@ -93,7 +91,7 @@
       </el-table-column>
       <el-table-column class-name="status-col" label="标签" align="left" width="80">
         <template slot-scope="scope">
-          <el-tag v-for="(item,index) in JSON.parse(scope.row.tag)" :key="index">{{item}}</el-tag>
+          <el-tag v-for="(item,index) in scope.row.tag" :key="index">{{item}}</el-tag>
         </template>
       </el-table-column>
          <el-table-column label="评论"  align="left" width="80">
@@ -115,9 +113,9 @@
         </template>
       </el-table-column>
            <el-table-column label="操作" align="left">
-        <template >
+        <template slot-scope="scope">
             <el-tooltip class="item" effect="dark" content="编辑" placement="top">
-                <el-button type="primary" size="small" icon="el-icon-edit" circle  @click="getArticle('1767852b5e599572330c648165456f2e')"></el-button>
+                <el-button type="primary" size="small" icon="el-icon-edit" circle  @click="getArticle(scope.row._id)"></el-button>
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="回收站" placement="top">
                 <el-button type="danger" size="small" icon="el-icon-delete" circle></el-button>
@@ -132,7 +130,7 @@
 </template>
 
 <script>
-import { getList,getApp } from '@/api/table'
+import { getList,test } from '@/api/table'
 
 export default {
   filters: {
@@ -168,9 +166,7 @@ export default {
     fetchData() {
       this.listLoading = true
       let obj = {status:0}
-      getList(obj,this.listPage).then(response => {
-        console.log(response)
-
+            getList(obj,this.listPage).then(response => {
         this.list = response.data.content
         this.listLoading = false
       })
@@ -194,10 +190,11 @@ export default {
       },
       // 获取文章详情
       getArticle(id){
-        console.log(id)
-          getApp(id).then(res=>{
-            console.log(res)
-          })
+        // console.log(id)
+        //   getApp(id).then(res=>{
+        //     console.log(res)
+        //   })
+        this.$router.push({ name: 'Write' , query:{id}})
       }
   }
 }
