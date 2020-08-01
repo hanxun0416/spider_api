@@ -58,7 +58,7 @@
       highlight-current-row
     >
     <el-table-column
-      type="selection"
+      type="index"
       width="60"
       align="center">
     </el-table-column>
@@ -68,56 +68,64 @@
          <a :href="scope.row.url" style="color:#1890ff">{{ scope.row.title }}</a>
         </template>
       </el-table-column>
-      <el-table-column label="状态" >
+      <el-table-column label="状态" width="100">
         <template slot-scope="scope">
           <!-- <el-badge is-dot class="item">数据查询</el-badge> -->
 
 
 
-          <i  v-if="scope.row.status=='0'" class="badge">正常</i>
+          <i  v-if="scope.row.manual=='1'" class="badge">正常</i>
+          <i  v-else class="badge">异常</i>
           <!-- <el-badge is-dot v-else-if="scope.row.status=='1'">编辑完毕</el-badge>
           <el-badge is-dot v-else-if="scope.row.status=='2'">发送完毕</el-badge>
           <el-badge is-dot v-else-if="scope.row.status=='-1'">作废</el-badge> -->
 
         </template>
       </el-table-column>
-      <el-table-column label="分类"  align="left">
+      <el-table-column label="简称"  align="left" width="100">
         <template slot-scope="scope">
-          <el-tag v-for="(item,index) in JSON.parse(scope.row.category)" :key="index">{{item}}</el-tag>
+          {{scope.row.sitename}}
         </template>
       </el-table-column>
-      <el-table-column label="专题" align="left">
+      <el-table-column label="分类"  align="left" width="150">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          <el-tag v-for="(item,index) in scope.row.category" :key="index">{{item}}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column label="来源" align="left">
+        <template slot-scope="scope">
+         <!-- <el-link href="{{scope.row.siteurl}}" > </el-link> -->
+           <el-link type="primary" :underline="false" :href="scope.row.siteurl">{{ scope.row.siteurl }}</el-link>
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="标签" align="left" width="80">
         <template slot-scope="scope">
-          <el-tag v-for="(item,index) in JSON.parse(scope.row.tag)" :key="index">{{item}}</el-tag>
+          <el-tag v-for="(item,index) in scope.row.tag" :key="index">{{item}}</el-tag>
         </template>
       </el-table-column>
-         <el-table-column label="评论"  align="left" width="80">
+         <!-- <el-table-column label="评论"  align="left" width="80">
         <template slot-scope="scope">
           {{ scope.row.pageviews }}
         </template>
-      </el-table-column>
-         <el-table-column label="访问"  align="left" width="80">
+      </el-table-column> -->
+         <el-table-column label="官网"  align="left">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+            <el-link type="primary" :underline="false" :href="scope.row.appwebsite">{{ scope.row.appwebsite }}</el-link>
+          <!-- {{ scope.row.appwebsite }} -->
         </template>
       </el-table-column>
 
 
-      <el-table-column align="left" prop="created_at" label="发布时间">
+      <!-- <el-table-column align="left" prop="created_at" label="发布时间">
         <template slot-scope="scope">
           <i class="el-icon-time" />
           <span>{{ scope.row.display_time }}</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
            <el-table-column label="操作" align="left">
-        <template >
+        <template slot-scope="scope">
             <el-tooltip class="item" effect="dark" content="编辑" placement="top">
-                <el-button type="primary" size="small" icon="el-icon-edit" circle  @click="getArticle('1767852b5e599572330c648165456f2e')"></el-button>
+                <el-button type="primary" size="small" icon="el-icon-edit" circle  @click="getArticle(scope.row._id)"></el-button>
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="回收站" placement="top">
                 <el-button type="danger" size="small" icon="el-icon-delete" circle></el-button>
@@ -201,6 +209,8 @@ export default {
       }
   }
 }
+
+
 </script>
 <style scoped>
   .item{margin-top: 5px}
