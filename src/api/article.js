@@ -24,6 +24,17 @@ export function saveArticle(id,data) {
   })
 }
 
+//获取站点信息
+export function getSite(data,params) {
+  return request({
+    url: '/site/list',
+    method: 'post',
+    data,
+    params
+  })
+}
+
+
 
 export function fetchPv(pv) {
   return request({
