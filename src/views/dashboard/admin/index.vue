@@ -7,7 +7,7 @@
 <script>
 import PanelGroup from "./components/PanelGroup";
 
-
+import {testJwt} from '@/api/article'
 export default {
   name: "adminDashboard",
   components: {
@@ -16,7 +16,10 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {},
+  created() {
+    testJwt()
+  },
 };
 </script>
 

@@ -88,8 +88,8 @@ export default {
     return {
       postForm: Object.assign({}, defaultForm),
       loading: false,
-      rules: {
-        title: [{ validator: validateRequire }],
+      rules: { 
+        
         content: [{ validator: validateRequire }],
       },
       pageStatus: [

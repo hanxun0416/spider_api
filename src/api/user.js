@@ -2,9 +2,11 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/vue-admin-template/user/login',
+    url: '/app/login',
     method: 'post',
     data
+    // headers:{'Content-Type':'application/x-www-form-urlencoded'}
+    
   })
 }
 

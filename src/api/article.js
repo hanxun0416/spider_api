@@ -34,6 +34,13 @@ export function getSite(data,params) {
   })
 }
 
+export function testJwt(){
+  return request({
+    url: '/protected',
+    method: 'get',
+   
+  })
+}
 
 
 export function fetchPv(pv) {
