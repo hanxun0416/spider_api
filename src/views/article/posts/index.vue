@@ -162,7 +162,6 @@
         background
         layout="total, sizes, prev, pager, next, jumper"
         :total="totalPage"
-        hide-on-single-page
         @prev-click="prevClick"
         @next-click="nextClick"
         @current-change="currentChange"
@@ -176,7 +175,7 @@
 </template>
 
 <script>
-import { getList } from "@/api/table";
+import { getList,updatestatus } from "@/api/table";
 import { getSite } from "@/api/article";
 
 export default {
@@ -243,9 +242,10 @@ export default {
     fetchData() {
       this.listLoading = true;
       getList(this.listData, this.listPage).then((response) => {
+        console.log(response)
         this.list = response.data.content;
         this.listLoading = false;
-        this.totalPage = response.data.pages;
+        this.totalPage = response.data.count;
       });
     },
     // 获取文章详情
@@ -297,13 +297,16 @@ export default {
         this.idSelect.forEach((item) => {
           this.batchEdit.id.push(item._id);
         });
-        console.log(this.batchEdit);
       }else{
           this.$message({
           message: '请选择你要操作的数据',
           type: 'warning'
         });
+        return;
       }
+       updatestatus(this.batchEdit).then(res=>{
+       this.submitForm()
+       })
     },
   },
 };
